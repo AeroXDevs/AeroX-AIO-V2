@@ -1,0 +1,137 @@
+const client = require('../index');
+const config  = require('../config.json');
+
+const { ContainerBuilder, TextDisplayBuilder, SeparatorBuilder, SeparatorSpacingSize, MessageFlags, MediaGalleryBuilder, MediaGalleryItemBuilder, WebhookClient } = require("discord.js");
+const logChannel = new WebhookClient({ url: config.joinwebhook })
+
+client.on('guildCreate', async (guild) => {
+  const data = await client.db12.get(`${guild.id}_premium`);
+  const promises = [];
+
+  if (!data) {
+    promises.push(client.db12.set(`${guild.id}_premium`, {
+      active: false,
+      premiumExpiresAt: null,
+    }));
+  } else if (Date.now() >= data.premiumExpiresAt) {
+    promises.push(client.db12.set(`${guild.id}_premium`, {
+      active: false,
+      premiumExpiresAt: null,
+    }));
+  }
+
+  promises.push(
+    client.db.set(`${guild.id}_wl`, { whitelisted: [] }),
+    client.db14.set(`${guild.id}_mediachannels`, { mediachannellist: [] }),
+    client.db11.set(`${guild.id}_eo`, { extraownerlist: [] }),
+    client.db11.set(`${guild.id}_ea`, { extraadminlist: [] }),
+    client.db10.set(`${guild.id}_ic`, { ignorechannellist: [], ignorebypasslist: [] }),
+    client.db15.set(`${guild.id}_nightmode`, { nightmoderoleslist: [], nightmodebypasslist: [] }),
+    client.db1.set(`${guild.id}_autorole`, { role: { humans: [], bots: [] } })
+  );
+
+  await Promise.all(promises);
+});
+
+client.on('guildDelete', async (guild) => {
+  const promises = [
+    client.db11.delete(`${guild.id}_eo`),
+    client.db11.delete(`${guild.id}_ea`),
+    client.db10.delete(`${guild.id}_ic`),
+    client.db14.delete(`${guild.id}_mediachannels`),
+    client.db.delete(`${guild.id}_antinuke`),
+    client.db.delete(`${guild.id}_antiban`),
+    client.db.delete(`${guild.id}_antikick`),
+    client.db.delete(`${guild.id}_antibot`),
+    client.db.delete(`${guild.id}_antiunban`),
+    client.db.delete(`${guild.id}_antiguildupdate`),
+    client.db.delete(`${guild.id}_antimemberupdate`),
+    client.db.delete(`${guild.id}_antichannelcreate`),
+    client.db.delete(`${guild.id}_antichanneldelete`),
+    client.db.delete(`${guild.id}_antichannelupdate`),
+    client.db.delete(`${guild.id}_antirolecreate`),
+    client.db.delete(`${guild.id}_antiroledelete`),
+    client.db.delete(`${guild.id}_antiroleupdate`),
+    client.db.delete(`${guild.id}_antiwebhookcreate`),
+    client.db.delete(`${guild.id}_antiwebhookdelete`),
+    client.db.delete(`${guild.id}_antiwebhookupdate`),
+    client.db.delete(`${guild.id}_antiemojicreate`),
+    client.db.delete(`${guild.id}_antiemojidelete`),
+    client.db.delete(`${guild.id}_antiemojiupdate`),
+    client.db.delete(`${guild.id}_antistickercreate`),
+    client.db.delete(`${guild.id}_antistickerdelete`),
+    client.db.delete(`${guild.id}_antistickerupdate`),
+    client.db.delete(`${guild.id}_antiprune`),
+    client.db.delete(`${guild.id}_autorecovery`),
+    client.db.delete(`${guild.id}_kickpunish`),
+    client.db.delete(`${guild.id}_banpunish`),
+    client.db.delete(`${guild.id}_quarantine`),
+    client.db.delete(`${guild.id}_wl`),
+    client.db15.delete(`${guild.id}_nightmode`),
+    client.db14.delete(`${guild.id}_mediachannels`),
+    client.db1.delete(`${guild.id}_autorole`)
+  ];
+  await Promise.all(promises);
+});
+
+client.on('guildCreate', async (guild) => {
+  const ownerId = guild.ownerId;
+  const owner = await client.users.fetch(ownerId);
+  
+  const container = new ContainerBuilder();
+  
+  container.addTextDisplayComponents(
+    new TextDisplayBuilder().setContent(`**Guild Joined**`)
+  );
+  
+  container.addSeparatorComponents(
+    new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true)
+  );
+  
+  container.addTextDisplayComponents(
+    new TextDisplayBuilder().setContent(`**Server Name:** ${guild.name}\n**Server ID:** ${guild.id}\n**Owner Tag:** ${owner.username}\n**Owner ID:** ${owner.id}\n**Members:** ${guild.memberCount}`)
+  );
+  
+  if (guild.iconURL({ dynamic: true })) {
+    container.addMediaGalleryComponents(
+      new MediaGalleryBuilder().addItems(
+        new MediaGalleryItemBuilder()
+          .setURL(guild.iconURL({ dynamic: true, size: 1024 }))
+          .setDescription(`${guild.name} Icon`)
+      )
+    );
+  }
+
+  await logChannel.send({ components: [container], flags: MessageFlags.IsComponentsV2 });
+});
+
+client.on('guildDelete', async (guild) => {
+  const ownerId = guild.ownerId;
+  const owner = await client.users.fetch(ownerId);
+  
+  const container = new ContainerBuilder();
+  
+  container.addTextDisplayComponents(
+    new TextDisplayBuilder().setContent(`**Guild Leave**`)
+  );
+  
+  container.addSeparatorComponents(
+    new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small).setDivider(true)
+  );
+  
+  container.addTextDisplayComponents(
+    new TextDisplayBuilder().setContent(`**Server Name:** ${guild.name}\n**Server ID:** ${guild.id}\n**Owner Tag:** ${owner.username}\n**Owner ID:** ${owner.id}\n**Members:** ${guild.memberCount}`)
+  );
+  
+  if (guild.iconURL({ dynamic: true })) {
+    container.addMediaGalleryComponents(
+      new MediaGalleryBuilder().addItems(
+        new MediaGalleryItemBuilder()
+          .setURL(guild.iconURL({ dynamic: true, size: 1024 }))
+          .setDescription(`${guild.name} Icon`)
+      )
+    );
+  }
+
+  await logChannel.send({ components: [container], flags: MessageFlags.IsComponentsV2 });
+});

@@ -1,0 +1,26 @@
+{
+  "token": "",
+  "mongo": "",
+  "clientId": "",
+  "guildId": "",
+  "application_id": "",
+  "webhook": "",
+  "joinwebhook": "",
+  "webid": "",
+  "webtoken": "",
+  "voice": "",
+  "groqApiKey": "",
+  "nodes": [
+    {
+      "host": "lavalink.jirayu.net",
+      "port": 13592,
+      "password": "youshallnotpass",
+      "identifier": "LavaLink",
+      "retryAmount": 1000,
+      "retrydelay": 10000,
+      "resumeStatus": true,
+      "resumeTimeout": 1000,
+      "secure": false
+    }
+  ]
+}

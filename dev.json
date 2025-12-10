@@ -1,0 +1,8 @@
+{
+  "ownerIDS": ["l"],
+  "EvalAccess": [""],
+  "BadgeAccess": [""],
+  "NoPrefixAccess": [""],
+  "BlacklistAccess": [""],
+  "PremiumAccess": [""]
+}

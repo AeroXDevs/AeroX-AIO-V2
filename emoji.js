@@ -1,0 +1,60 @@
+module.exports = {
+  id: {
+    automod: "<:eg_shield:1428686163513704549>",
+    autorole: "<:rEmerald:1428686171617099827>",
+    moderation: "<:ntools:1428686179586543647>",
+    ignore: "<:MekoStatusRole:1428686050154516630>",
+    music: "<:nmusic:1428686187211657250>",
+    nightmode: "<a:nightsky:1428686099219484684>",
+    premium: "<:eg_premium:1428686195377963080>",
+    giveaway: "<:_giveaway2:1428686203447676959>",
+    owner: "<:MekoStatusRole:1428686050154516630>",
+    boost: "<:MekoStatusRole:1428686050154516630>",
+    welcome: "<:eg_wave:1428686211828023426>",
+    ticket: "<:eg_ticket:1428686219734417519>",
+    information: "<:eg_discovery:1428686228160774285>",
+    utility: "<:eg_wrench:1428686236855566367>",
+    greet: "<:MekoStatusRole:1428686050154516630>",
+    sticky: "<:eg_fire:1428686244723818517>",
+    ai: "<:eg_premium:1428686195377963080>",
+    vanity: "<:nlink:1428686252319838284>"
+  },
+  badges: {
+    owner: "<a:Owner:1428686108019134587>",
+    dev: "<:dev:1428686260511182858>",
+    admin: "<:admin:1428686268576956536>",
+    staff: "<:staff:1428686276470640702>",
+    partner: "<:partner:1428686284423036972>",
+    supporter: "<:EarlySupporter:1428686292757250069>",
+    sponsor: "<a:bitcoin:1428686117242142730>",
+    os: "<:rd_Friendship:1428686300805857300>",
+    vip: "<:vip:1428686314697654273>",
+    friend: "<:Friend:1428686322851381321>",
+    bug: "<:BUGHUNTER_LEVEL_2:1428686330443071529>"
+  },
+  util: {
+    enabled: "<a:x_enabler:1428686127149092905>",
+    disabled: "<a:x_disabler:1428686135747416104>",
+    enabler: "<a:x_enabler:1428686127149092905>",
+    disabler: "<a:x_disabler:1428686135747416104>",
+    arrow: "<a:arrow:1428686090176434248>",
+    tick: "<:tick_icon:1428686338131230780>",
+    cross: "<:nwrong:1428686345722658826>",
+    loading: "<a:nx_loading:1428686143490359366>"
+  },
+  flag: {
+    nitro: "<:Nitro:1428686353532719134>",
+    booster: "<a:Boosters:1428686155196534785>",
+    hypesquad: "<:HypeSquad:1428686361434787841>",
+    hype1: "<:badge_brilliance:1428686369114292236>",
+    hype2: "<:badge_bravery:1428686376836010095>",
+    hype3: "<:badge_balance:1428686384956182609>",
+    bug1: "<:BUGHUNTER_LEVEL_1:1428686398311108709>",
+    bug2: "<:BUGHUNTER_LEVEL_2:1428686330443071529>",
+    verifieddev: "<:early:1428686406431146015>",
+    partner: "<:partner:1428686284423036972>",
+    activedev: "<:activedev:1428686414131888270>",
+    verifiedbot: "<:BOT:1428686422369636443>",
+    staff: "<:staff:1428686276470640702>"
+  }
+};
