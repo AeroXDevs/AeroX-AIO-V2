@@ -23,7 +23,7 @@ module.exports = {
     const prefix =
       (await client.db8.get(`${message.guild.id}_prefix`)) ||
       Settings.bot.info.prefix;
-    const ray = await client.users.fetch(owner);
+    const aerox = await client.users.fetch(owner);
     const premium = await client.db12.get(`${message.guild.id}_premium`);
 
     const menuOptionsPrefix = new ActionRowBuilder().addComponents(
