@@ -232,16 +232,7 @@ AeroX/
 - Audit log integration
 - Rate limiting and cooldowns
 - Secure token storage
-
----
-
-## 📚 Documentation
-
-For detailed information about specific features:
-- Check `AeroX/replit.md` for system architecture
-- Review individual command files for usage examples
-- Examine event handlers for custom behavior
-
+- 
 ---
 
 ## 🤝 Support
